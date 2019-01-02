@@ -30,3 +30,4 @@ public class SimplePowerUp extends GameEntity implements Interactable {
         return "Got power-up :)";
     }
 }
+

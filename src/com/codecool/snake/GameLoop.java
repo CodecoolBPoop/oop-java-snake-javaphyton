@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.snakes.Snake;
+import javafx.scene.image.Image;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ public class GameLoop {
     private Snake snake;
     private boolean running = false;
 
-    public GameLoop(Snake snake) { this.snake = snake; }
+    public GameLoop(Snake snake) {
+        this.snake = snake;
+    }
 
     public void start() {
         running = true;

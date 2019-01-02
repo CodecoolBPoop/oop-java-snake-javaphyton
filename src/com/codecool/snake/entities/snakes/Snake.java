@@ -7,7 +7,11 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+
+import javax.swing.*;
 
 
 public class Snake implements Animatable {
@@ -60,6 +64,11 @@ public class Snake implements Animatable {
     private void checkForGameOverConditions() {
         if (head.isOutOfBounds() || health <= 0) {
             System.out.println("Game Over");
+
+            ImageIcon icon = new ImageIcon("resources/game-over.png");
+            JOptionPane.showMessageDialog(null, null,
+                    "GAME OVER", JOptionPane.INFORMATION_MESSAGE, icon);
+
             Globals.getInstance().stopGame();
         }
     }
