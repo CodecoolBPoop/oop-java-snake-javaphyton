@@ -7,11 +7,14 @@ import com.codecool.snake.entities.snakes.Snake;
 import javafx.scene.image.Image;
 
 import java.util.List;
+import java.util.Random;
 
 public class GameLoop {
     private Snake snake;
     private boolean running = false;
     private int clock = 0;
+    private boolean spawned = true;
+    int spawnInterval;
 
     public GameLoop(Snake snake) {
         this.snake = snake;
@@ -33,9 +36,16 @@ public class GameLoop {
                 if (clock % 100 == 0) {
                     snake.score++;
                 }
-                if (clock % 300 == 0) {
+                Random r = new Random();
+                if (spawned) {
+                    spawnInterval = r.nextInt(500) + 500;
+                    System.err.println(spawnInterval);
+                    spawned = false;
+                }
+                if (clock % spawnInterval == 0) {
                     Globals.getInstance().game.spawnEnemies(4);
                     Globals.getInstance().game.spawnPowerUps(4);
+                    spawned = true;
                 }
             }
             for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {

@@ -2,6 +2,7 @@ package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.entities.enemies.Enemy;
+import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HeartPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
@@ -59,8 +60,14 @@ public class Game extends Pane {
 
     public void spawnEnemies(int numberOfEnemies) {
         Vec2d snakeHeadPos = snake.head.getSnakeHeadPosition();
-        for (int i = 0; i < numberOfEnemies; ++i){
-            GameEntity temp = new SimpleEnemy(snakeHeadPos);
+        for (int i = 0; i < numberOfEnemies; ++i) {
+            GameEntity temp;
+//            if (i % 2 ==0) {
+//                temp = new SimpleEnemy(snakeHeadPos);
+//            } else {
+//                temp = new HomingEnemy(snakeHeadPos);
+//            }
+            temp = new HomingEnemy(snakeHeadPos);
             sprites.add(temp);
         }
     }
@@ -70,7 +77,7 @@ public class Game extends Pane {
         for (int i = 0; i < numberOfPowerUps; ++i) {
             temp = new SimplePowerUp();
             sprites.add(temp);
-            if(i % 2 == 0) {
+            if (i % 3 == 0) {
                 temp = new HeartPowerUp();
                 sprites.add(temp);
             }
@@ -85,17 +92,17 @@ public class Game extends Pane {
         scene.setOnKeyReleased(event -> InputHandler.getInstance().setKeyReleased(event.getCode()));
     }
 
-    public void cleanUp(){
+    public void cleanUp() {
         Iterator snakeBody = this.snake.body.getList().iterator();
         Iterator sprite = this.sprites.iterator();
 
-        while (snakeBody.hasNext()){
-            ((GameEntity)snakeBody.next()).destroy();
+        while (snakeBody.hasNext()) {
+            ((GameEntity) snakeBody.next()).destroy();
         }
         this.snake.body.clear();
 
-        while (sprite.hasNext()){
-            ((GameEntity)sprite.next()).destroy();
+        while (sprite.hasNext()) {
+            ((GameEntity) sprite.next()).destroy();
         }
         this.snake.score = 0;
         this.snake.speed = 2;
@@ -104,7 +111,7 @@ public class Game extends Pane {
 
     }
 
-    public void setSnake(){
+    public void setSnake() {
         this.snake.head.setX(500);
         this.snake.head.setY(500);
         snake.addPart(4);
