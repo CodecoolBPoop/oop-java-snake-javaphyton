@@ -3,6 +3,7 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import java.util.List;
 
+import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 
 
@@ -40,5 +41,9 @@ public class Display {
     public void clear() {
         displayPane.getChildren().clear();
         gameObjects.clear();
+    }
+
+    public void addButton(Button button) {
+        displayPane.getChildren().add(button);
     }
 }
