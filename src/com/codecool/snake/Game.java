@@ -97,6 +97,7 @@ public class Game extends Pane {
         this.snake.head.setY(500);
         snake.addPart(4);
         this.snake.health = 30;
+        Globals.getInstance().startGame();
     }
 
 

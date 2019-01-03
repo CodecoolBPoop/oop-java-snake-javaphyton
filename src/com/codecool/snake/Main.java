@@ -50,6 +50,8 @@ public class Main extends Application {
     public void createButtons() {
         Button restartBtn = new Button("Restart");
         restartBtn.defaultButtonProperty();
+        restartBtn.setLayoutX(0);
+        restartBtn.setLayoutY(675);
         restartBtn.setOnMouseClicked((mouseEvent) -> {
             System.err.println("RESTART");
             restart(primaryStage);
