@@ -106,19 +106,18 @@ public class Game extends Pane {
         }
         this.snake.score = 0;
         this.snake.speed = 2;
-        spawnEnemies(4);
-        spawnPowerUps(4);
-
+        this.snake.life.resetHealth(this.snake.startingHealth);
     }
 
     public void setSnake() {
         this.snake.head.setX(500);
         this.snake.head.setY(500);
         snake.addPart(4);
-        this.snake.life.currentHealth = this.snake.startingHealth;
+
         this.snake.head.setRotationToDefault();
         Globals.getInstance().startGame();
+        spawnEnemies(4);
+        spawnPowerUps(4);
     }
-
 
 }

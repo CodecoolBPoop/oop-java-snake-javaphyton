@@ -28,4 +28,9 @@ public class LifeBar extends GameEntity {
         Globals.getInstance().display.updateLifeBar(this);
     }
 
+    public void resetHealth(int health){
+        currentHealth = health;
+        reDrawLifeBar();
+    }
+
 }
