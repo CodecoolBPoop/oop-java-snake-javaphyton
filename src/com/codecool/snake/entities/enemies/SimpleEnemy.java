@@ -38,20 +38,20 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
             this.xBound = (int)Math.round(Globals.WINDOW_WIDTH) - (int)Math.round(snakePos.x);
         } else {
 //            if we spawn to the left from the snake
-            this.xBound = (int)Math.round(Globals.WINDOW_WIDTH) - (int)Math.round(snakePos.x);
+            this.xBound = (int)Math.round(snakePos.x);
         }
 //        we set the X Position of the enemy
-        this.xPos = snakePos.x - (double)rnd.nextInt(xBound);
+        this.xPos = (double)rnd.nextInt(xBound) + snakePos.x;
 
         if (coordinatesY) {
 //            if we spawn below the snake
             this.yBound = (int)Math.round(Globals.WINDOW_HEIGHT) - (int)Math.round(snakePos.y);
         } else {
 //            if we spawn above the snake
-            this.yBound = (int)Math.round(Globals.WINDOW_HEIGHT) - (int)Math.round(snakePos.y);
+            this.yBound = (int)Math.round(snakePos.y);
         }
 //        we set the Y Position of the enemy
-        this.yPos = snakePos.y - (double)rnd.nextInt(yBound);
+        this.yPos = snakePos.y + (double)rnd.nextInt(yBound);
 
 
         setX(this.xPos);
