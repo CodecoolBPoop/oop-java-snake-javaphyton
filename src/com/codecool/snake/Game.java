@@ -58,8 +58,9 @@ public class Game extends Pane {
     }
 
     public void spawnEnemies(int numberOfEnemies) {
+        Vec2d snakeHeadPos = snake.head.getSnakeHeadPosition();
         for (int i = 0; i < numberOfEnemies; ++i){
-            GameEntity temp = new SimpleEnemy();
+            GameEntity temp = new SimpleEnemy(snakeHeadPos);
             sprites.add(temp);
         }
     }
