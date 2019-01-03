@@ -22,11 +22,12 @@ public class Snake implements Animatable {
     private DelayedModificationList<GameEntity> body;
     private LifeBar life;
 
+    public int score;
 
     public Snake(Vec2d position) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
-        life = new LifeBar(100);
+        life = new LifeBar(30);
 
         addPart(4);
     }
@@ -69,7 +70,7 @@ public class Snake implements Animatable {
             System.out.println("Game Over");
 
             ImageIcon icon = new ImageIcon("resources/game-over.png");
-            JOptionPane.showMessageDialog(null, null,
+            JOptionPane.showMessageDialog(null, "You died! Your final score was: " + score,
                     "GAME OVER", JOptionPane.INFORMATION_MESSAGE, icon);
 
             Globals.getInstance().stopGame();

@@ -50,7 +50,9 @@ public class Game extends Pane {
     public void spawnPowerUps(int numberOfPowerUps) {
         for (int i = 0; i < numberOfPowerUps; ++i) {
             new SimplePowerUp();
-            new HeartPowerUp();
+            if(i % 2 == 0) {
+                new HeartPowerUp();
+            }
         }
         new SpeedUpPowerUp();
     }

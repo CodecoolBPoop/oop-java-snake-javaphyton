@@ -30,6 +30,9 @@ public class GameLoop {
             snake.step();
             {
                 clock++;
+                if (clock % 100 == 0) {
+                    snake.score++;
+                }
                 if (clock % 300 == 0) {
                     Globals.getInstance().game.spawnEnemies(4);
                     Globals.getInstance().game.spawnPowerUps(4);
