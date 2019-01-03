@@ -18,8 +18,8 @@ import javax.swing.*;
 public class Snake implements Animatable {
     private static float speed = 2;
 
-    private SnakeHead head;
-    private DelayedModificationList<GameEntity> body;
+    public SnakeHead head;
+    public DelayedModificationList<GameEntity> body;
     private LifeBar life;
 
     public int score;
@@ -40,7 +40,6 @@ public class Snake implements Animatable {
         checkForGameOverConditions();
 
         body.doPendingModifications();
-
     }
 
     private SnakeControl getUserInput() {
