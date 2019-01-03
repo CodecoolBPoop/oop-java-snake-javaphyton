@@ -11,7 +11,6 @@ import com.sun.javafx.geom.Vec2d;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 
-
 public class Game extends Pane {
     private Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
@@ -29,7 +28,6 @@ public class Game extends Pane {
         spawnSnake();
         spawnEnemies(4);
         spawnPowerUps(4);
-
         GameLoop gameLoop = new GameLoop(snake);
         Globals.getInstance().setGameLoop(gameLoop);
         gameTimer.setup(gameLoop::step);
@@ -45,12 +43,12 @@ public class Game extends Pane {
         snake = new Snake(new Vec2d(500, 500));
     }
 
-    private void spawnEnemies(int numberOfEnemies) {
-        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
+    public void spawnEnemies(int numberOfEnemies) {
+        for (int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
     }
 
-    private void spawnPowerUps(int numberOfPowerUps) {
-        for(int i = 0; i < numberOfPowerUps; ++i) {
+    public void spawnPowerUps(int numberOfPowerUps) {
+        for (int i = 0; i < numberOfPowerUps; ++i) {
             new SimplePowerUp();
             new HeartPowerUp();
         }

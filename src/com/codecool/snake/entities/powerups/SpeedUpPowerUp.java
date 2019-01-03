@@ -22,7 +22,7 @@ public class SpeedUpPowerUp extends GameEntity implements Interactable {
 
     @Override
     public void apply(GameEntity entity) {
-        if(entity instanceof SnakeHead){
+        if (entity instanceof SnakeHead) {
             System.out.println(getMessage());
             destroy();
         }
