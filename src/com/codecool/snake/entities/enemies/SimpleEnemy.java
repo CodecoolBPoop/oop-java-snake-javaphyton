@@ -41,7 +41,12 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
             this.xBound = (int)Math.round(snakePos.x);
         }
 //        we set the X Position of the enemy
-        this.xPos = (double)rnd.nextInt(xBound) + snakePos.x;
+        if (this.xBound < 0 || this.xBound> (int)Math.round(Globals.WINDOW_WIDTH)) {
+            this.xPos = (double)rnd.nextInt(500) + snakePos.x;
+            this.xBound = 500;
+        } else {
+            this.xPos = (double) rnd.nextInt(xBound) + snakePos.x;
+        }
 
         if (coordinatesY) {
 //            if we spawn below the snake
@@ -51,7 +56,12 @@ public class SimpleEnemy extends Enemy implements Animatable, Interactable {
             this.yBound = (int)Math.round(snakePos.y);
         }
 //        we set the Y Position of the enemy
-        this.yPos = snakePos.y + (double)rnd.nextInt(yBound);
+        if (this.yBound < 0 || this.yBound > (int)Math.round(Globals.WINDOW_HEIGHT)) {
+            this.yPos = snakePos.y + (double)rnd.nextInt(500);
+            this.yBound = 500;
+        } else {
+            this.yPos = snakePos.y + (double)rnd.nextInt(yBound);
+        }
 
 
         setX(this.xPos);
