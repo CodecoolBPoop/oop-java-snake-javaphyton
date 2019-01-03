@@ -44,7 +44,8 @@ public class Game extends Pane {
     }
 
     private void spawnEnemies(int numberOfEnemies) {
-        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy();
+        Vec2d snakeHeadPos = snake.getHeadPosition();
+        for(int i = 0; i < numberOfEnemies; ++i) new SimpleEnemy(snakeHeadPos);
     }
 
     private void spawnPowerUps(int numberOfPowerUps) {
@@ -56,4 +57,5 @@ public class Game extends Pane {
         scene.setOnKeyPressed(event -> InputHandler.getInstance().setKeyPressed(event.getCode()));
         scene.setOnKeyReleased(event -> InputHandler.getInstance().setKeyReleased(event.getCode()));
     }
+
 }

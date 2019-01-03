@@ -38,6 +38,10 @@ public class SnakeHead extends GameEntity implements Interactable {
         setY(getY() + heading.getY());
     }
 
+    public Vec2d getSnakeHeadPosition() {
+        return super.getPosition();
+    }
+
     @Override
     public void apply(GameEntity entity) {
         if(entity instanceof Enemy){
