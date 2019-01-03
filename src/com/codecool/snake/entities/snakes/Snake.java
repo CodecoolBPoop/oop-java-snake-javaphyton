@@ -95,4 +95,5 @@ public class Snake implements Animatable {
     public void changeSpeed(double delta) {
         speed += delta;
     }
+
 }

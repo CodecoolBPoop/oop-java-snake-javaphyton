@@ -16,15 +16,18 @@ import javafx.geometry.Point2D;
 public class SnakeHead extends GameEntity implements Interactable {
     private static final float turnRate = 2;
     private Snake snake;
+    private double defaultRotation;
 
     public SnakeHead(Snake snake, Vec2d position) {
         this.snake = snake;
         setImage(Globals.getInstance().getImage("SnakeHead"));
         setPosition(position);
+        defaultRotation = getRotate();
     }
 
     public void updateRotation(SnakeControl turnDirection, float speed) {
         double headRotation = getRotate();
+
 
         if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
             headRotation = headRotation - turnRate;
@@ -61,6 +64,10 @@ public class SnakeHead extends GameEntity implements Interactable {
             snake.changeSpeed(0.5);
             snake.score += 10;
         }
+    }
+
+    public void setRotationToDefault() {
+        setRotate(defaultRotation);
     }
 
     @Override

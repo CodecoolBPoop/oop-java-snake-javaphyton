@@ -108,6 +108,7 @@ public class Game extends Pane {
         this.snake.head.setY(500);
         snake.addPart(4);
         this.snake.life.currentHealth = this.snake.startingHealth;
+        this.snake.head.setRotationToDefault();
         Globals.getInstance().startGame();
     }
 
