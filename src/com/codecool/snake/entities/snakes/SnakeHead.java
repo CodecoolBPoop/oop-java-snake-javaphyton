@@ -5,6 +5,8 @@ import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
 import com.codecool.snake.entities.enemies.Enemy;
+import com.codecool.snake.entities.powerups.SpeedUpPowerUp;
+import com.codecool.snake.entities.powerups.HeartPowerUp;
 import com.codecool.snake.entities.powerups.SimplePowerUp;
 
 import com.sun.javafx.geom.Vec2d;
@@ -14,15 +16,18 @@ import javafx.geometry.Point2D;
 public class SnakeHead extends GameEntity implements Interactable {
     private static final float turnRate = 2;
     private Snake snake;
+    private double defaultRotation;
 
     public SnakeHead(Snake snake, Vec2d position) {
         this.snake = snake;
         setImage(Globals.getInstance().getImage("SnakeHead"));
         setPosition(position);
+        defaultRotation = getRotate();
     }
 
     public void updateRotation(SnakeControl turnDirection, float speed) {
         double headRotation = getRotate();
+
 
         if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
             headRotation = headRotation - turnRate;
@@ -46,12 +51,27 @@ public class SnakeHead extends GameEntity implements Interactable {
     public void apply(GameEntity entity) {
         if(entity instanceof Enemy){
             System.out.println(getMessage());
-            snake.changeHealth(((Enemy) entity).getDamage());
+            snake.changeHealth(-((Enemy) entity).getDamage());
         }
         if(entity instanceof SimplePowerUp){
             System.out.println(getMessage());
             snake.addPart(4);
+            snake.score += 5;
         }
+        if(entity instanceof HeartPowerUp) {
+            System.out.println(getMessage());
+            snake.changeHealth(10);
+            snake.score += 5;
+        }
+        if(entity instanceof SpeedUpPowerUp) {
+            System.out.println(getMessage());
+            snake.changeSpeed(0.5);
+            snake.score += 10;
+        }
+    }
+
+    public void setRotationToDefault() {
+        setRotate(defaultRotation);
     }
 
     @Override

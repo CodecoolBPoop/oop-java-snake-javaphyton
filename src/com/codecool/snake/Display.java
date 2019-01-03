@@ -3,6 +3,9 @@ package com.codecool.snake;
 import com.codecool.snake.entities.GameEntity;
 import java.util.List;
 
+import javafx.scene.control.Button;
+import com.codecool.snake.entities.UI_elements.HeartIcon;
+import com.codecool.snake.entities.UI_elements.LifeBar;
 import javafx.scene.layout.Pane;
 
 
@@ -37,8 +40,22 @@ public class Display {
         displayPane.getChildren().add(snakeHead);
     }
 
+    public void updateLifeBar(LifeBar lifeBar) {
+        for (HeartIcon lifeIcon : lifeBar.icons) {
+            displayPane.getChildren().remove(lifeIcon);
+        }
+        for (int i = 0; i < lifeBar.numberOfIcons; i++) {
+            lifeBar.icons[i] = new HeartIcon(i);
+        }
+
+    }
+
     public void clear() {
         displayPane.getChildren().clear();
         gameObjects.clear();
+    }
+
+    public void addButton(Button button) {
+        displayPane.getChildren().add(button);
     }
 }

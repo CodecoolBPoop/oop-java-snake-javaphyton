@@ -4,6 +4,7 @@ import com.codecool.snake.DelayedModificationList;
 import com.codecool.snake.Globals;
 import com.codecool.snake.entities.Animatable;
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.UI_elements.LifeBar;
 import com.codecool.snake.eventhandler.InputHandler;
 
 import com.sun.javafx.geom.Vec2d;
@@ -15,16 +16,19 @@ import javax.swing.*;
 
 
 public class Snake implements Animatable {
-    private static final float speed = 2;
-    private int health = 100;
+    public float speed = 2;
 
-    private SnakeHead head;
-    private DelayedModificationList<GameEntity> body;
+    public SnakeHead head;
+    public DelayedModificationList<GameEntity> body;
+    public LifeBar life;
+    public int startingHealth = 30;
 
+    public int score;
 
     public Snake(Vec2d position) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
+        life = new LifeBar(startingHealth);
 
         addPart(4);
     }
@@ -58,15 +62,15 @@ public class Snake implements Animatable {
     }
 
     public void changeHealth(int diff) {
-        health += diff;
+        life.changeHealth(diff);
     }
 
     private void checkForGameOverConditions() {
-        if (head.isOutOfBounds() || health <= 0) {
+        if (head.isOutOfBounds() || life.currentHealth <= 0) {
             System.out.println("Game Over");
 
             ImageIcon icon = new ImageIcon("resources/game-over.png");
-            JOptionPane.showMessageDialog(null, null,
+            JOptionPane.showMessageDialog(null, "You died! Your final score was: " + score,
                     "GAME OVER", JOptionPane.INFORMATION_MESSAGE, icon);
 
             Globals.getInstance().stopGame();
@@ -88,8 +92,8 @@ public class Snake implements Animatable {
         return head;
     }
 
-    public Vec2d getHeadPosition() {
-        return head.getSnakeHeadPosition();
+    public void changeSpeed(double delta) {
+        speed += delta;
     }
 
 }
