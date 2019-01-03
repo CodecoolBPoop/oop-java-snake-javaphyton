@@ -16,18 +16,19 @@ import javax.swing.*;
 
 
 public class Snake implements Animatable {
-    private static float speed = 2;
+    public float speed = 2;
 
     public SnakeHead head;
     public DelayedModificationList<GameEntity> body;
-    private LifeBar life;
+    public LifeBar life;
+    public int startingHealth = 30;
 
     public int score;
 
     public Snake(Vec2d position) {
         head = new SnakeHead(this, position);
         body = new DelayedModificationList<>();
-        life = new LifeBar(30);
+        life = new LifeBar(startingHealth);
 
         addPart(4);
     }

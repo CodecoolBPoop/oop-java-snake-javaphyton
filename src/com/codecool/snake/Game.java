@@ -96,7 +96,8 @@ public class Game extends Pane {
         while (sprite.hasNext()){
             ((GameEntity)sprite.next()).destroy();
         }
-
+        this.snake.score = 0;
+        this.snake.speed = 2;
         spawnEnemies(4);
         spawnPowerUps(4);
 
@@ -106,7 +107,7 @@ public class Game extends Pane {
         this.snake.head.setX(500);
         this.snake.head.setY(500);
         snake.addPart(4);
-        this.snake.health = 30;
+        this.snake.life.currentHealth = this.snake.startingHealth;
         Globals.getInstance().startGame();
     }
 
