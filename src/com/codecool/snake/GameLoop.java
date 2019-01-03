@@ -11,6 +11,7 @@ import java.util.List;
 public class GameLoop {
     private Snake snake;
     private boolean running = false;
+    private int clock = 0;
 
     public GameLoop(Snake snake) {
         this.snake = snake;
@@ -25,8 +26,15 @@ public class GameLoop {
     }
 
     public void step() {
-        if(running) {
+        if (running) {
             snake.step();
+            {
+                clock++;
+                if (clock % 300 == 0) {
+                    Globals.getInstance().game.spawnEnemies(4);
+                    Globals.getInstance().game.spawnPowerUps(4);
+                }
+            }
             for (GameEntity gameObject : Globals.getInstance().display.getObjectList()) {
                 if (gameObject instanceof Animatable) {
                     ((Animatable) gameObject).step();
@@ -45,8 +53,8 @@ public class GameLoop {
             if (objToCheck instanceof Interactable) {
                 for (int otherObjIdx = idxToCheck + 1; otherObjIdx < gameObjs.size(); ++otherObjIdx) {
                     GameEntity otherObj = gameObjs.get(otherObjIdx);
-                    if (otherObj instanceof Interactable){
-                        if(objToCheck.getBoundsInParent().intersects(otherObj.getBoundsInParent())){
+                    if (otherObj instanceof Interactable) {
+                        if (objToCheck.getBoundsInParent().intersects(otherObj.getBoundsInParent())) {
                             ((Interactable) objToCheck).apply(otherObj);
                             ((Interactable) otherObj).apply(objToCheck);
                         }
