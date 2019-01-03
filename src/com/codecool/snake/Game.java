@@ -100,7 +100,6 @@ public class Game extends Pane {
         this.snake.score = 0;
         this.snake.speed = 2;
         this.snake.life.resetHealth(this.snake.startingHealth);
-
     }
 
     public void setSnake(){
@@ -113,6 +112,5 @@ public class Game extends Pane {
         spawnEnemies(4);
         spawnPowerUps(4);
     }
-
 
 }
