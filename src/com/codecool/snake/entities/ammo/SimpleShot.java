@@ -19,6 +19,7 @@ public class SimpleShot extends GameEntity implements Interactable, Animatable {
         setFitWidth(10);
         Snake currentSnake = Globals.getInstance().game.snake;
         double rotation = currentSnake.head.getRotate();
+        setRotate(currentSnake.head.getRotate() - 90);
         Vec2d startingPos = currentSnake.head.getSnakeHeadPosition();
         float speed = currentSnake.speed * 2;
         heading = Utils.directionToVector(rotation, speed);
