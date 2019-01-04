@@ -6,6 +6,7 @@ import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import jdk.nashorn.internal.objects.Global;
 
 import java.io.IOException;
@@ -24,6 +25,8 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         game = new Game();
+
+        game.setTableBackground(new Image("/background1.png"));
         mainScene = new Scene(game, Globals.WINDOW_WIDTH, Globals.WINDOW_HEIGHT);
         createButtons();
         gameStart();

@@ -36,6 +36,7 @@ public class Globals {
         resources.addImage("PowerUpHeart", new Image("powerup_heart.png"));
         resources.addImage("PowerUpDeath", new Image("powerup_death.png"));
         resources.addImage("Shot", new Image("laser.png"));
+        resources.addImage("background", new Image("background1.png"));
     }
 
     public Image getImage(String name) {
@@ -53,4 +54,6 @@ public class Globals {
     private Globals() {
         // singleton needs the class to have private constructor
     }
+
+
 }
