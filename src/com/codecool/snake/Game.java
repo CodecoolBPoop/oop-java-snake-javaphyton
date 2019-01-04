@@ -1,6 +1,7 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
+import com.codecool.snake.entities.enemies.CirclingEnemy;
 import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HeartPowerUp;
@@ -14,13 +15,14 @@ import javafx.scene.layout.Pane;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import java.util.Random;
 
 public class Game extends Pane {
 
     public Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
     private ArrayList<GameEntity> sprites = new ArrayList<>();
+    private Random rnd = new Random();
 
 
     Game() {
@@ -55,8 +57,11 @@ public class Game extends Pane {
         Vec2d snakeHeadPos = snake.head.getSnakeHeadPosition();
         for (int i = 0; i < numberOfEnemies; ++i) {
             GameEntity temp;
-            if (i % 2 ==0) {
+            int x = rnd.nextInt(3);
+            if (x == 0) {
                 temp = new SimpleEnemy(snakeHeadPos);
+            } else if (x == 1) {
+                temp = new CirclingEnemy(snakeHeadPos);
             } else {
                 temp = new HomingEnemy(snakeHeadPos);
             }
