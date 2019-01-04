@@ -72,7 +72,7 @@ public class CirclingEnemy extends Enemy implements Animatable, Interactable {
             destroy();
         }
         double degree = (this.direction/360);
-        this.deltaDegree = ((double)rnd.nextInt(50)+1)/1000;
+        this.deltaDegree = ((double)rnd.nextInt(20)+1)/1000;
         if (degree + this.deltaDegree > 1) {
             degree = -1;
         } else {

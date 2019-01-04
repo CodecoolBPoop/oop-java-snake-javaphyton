@@ -20,43 +20,39 @@ public class HomingEnemy extends Enemy implements Animatable, Interactable {
     private double yPos;
     private int xBound;
     private int yBound;
+    private double direction;
+    private double degree;
+    int speed;
 
     public HomingEnemy(Vec2d snakePos) {
         super(10);
 
         setImage(Globals.getInstance().getImage("SimpleEnemy"));
 
-//        setX(rnd.nextDouble() * Globals.WINDOW_WIDTH);
-//        setY(rnd.nextDouble() * Globals.WINDOW_HEIGHT);
-
         boolean coordinatesX = rnd.nextBoolean();
         boolean coordinatesY = rnd.nextBoolean();
 
         if (coordinatesX) {
-//            if we spawn to the right from the snake
             this.xBound = (int) Math.round(Globals.WINDOW_WIDTH) - (int) Math.round(snakePos.x);
         } else {
-//            if we spawn to the left from the snake
             this.xBound = (int) Math.round(snakePos.x);
         }
-//        we set the X Position of the enemy
         this.xPos = (double) rnd.nextInt(xBound) + snakePos.x;
 
         if (coordinatesY) {
-//            if we spawn below the snake
             this.yBound = (int) Math.round(Globals.WINDOW_HEIGHT) - (int) Math.round(snakePos.y);
         } else {
-//            if we spawn above the snake
             this.yBound = (int) Math.round(snakePos.y);
         }
-//        we set the Y Position of the enemy
         this.yPos = snakePos.y + (double) rnd.nextInt(yBound);
 
 
         setX(this.xPos);
         setY(this.yPos);
-        double direction = rnd.nextDouble() * 360;
+        this.direction = rnd.nextDouble() * 360;
         setRotate(direction);
+
+        heading = Utils.directionToVector(direction, 1);
     }
 
     @Override
@@ -65,22 +61,23 @@ public class HomingEnemy extends Enemy implements Animatable, Interactable {
             destroy();
         }
         Vec2d snakePos = Globals.getInstance().game.snake.head.getSnakeHeadPosition();
-        double spdX;
-        if (Math.abs(snakePos.x - getX()) < 100) {
-            spdX = 50;
+        this.xPos = snakePos.x - getX();
+        this.yPos = snakePos.y - getY();
+        this.degree = Math.toDegrees(Math.atan(yPos/xPos));
+        if(xPos < 0) {
+            direction = degree - 90;
         } else {
-            spdX = 80;
+            direction = degree + 90;
         }
-        double spdY;
-        if (Math.abs(snakePos.y - getY()) < 100) {
-            spdY = 50;
-        } else {
-            spdY = 80;
-        }
-        double deltaX = (snakePos.x - getX())/spdX;
-        double deltaY = (snakePos.y - getY())/spdY;
-        setX(getX() + deltaX);
-        setY(getY() + deltaY);
+        setRotate(direction);
+        int maxSpeed = (int)Math.round(Globals.getInstance().game.snake.speed);
+        this.speed = rnd.nextInt(maxSpeed)+maxSpeed/2;
+
+        heading = Utils.directionToVector(direction, speed);
+
+        setX(getX() + heading.getX());
+        setY(getY() + heading.getY());
+
     }
 
     @Override

@@ -39,7 +39,6 @@ public class GameLoop {
                 Random r = new Random();
                 if (spawned) {
                     spawnInterval = r.nextInt(500) + 500;
-                    System.err.println(spawnInterval);
                     spawned = false;
                 }
                 if (clock % spawnInterval == 0) {
