@@ -1,7 +1,6 @@
 package com.codecool.snake;
 
 import com.codecool.snake.entities.GameEntity;
-import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.enemies.HomingEnemy;
 import com.codecool.snake.entities.enemies.SimpleEnemy;
 import com.codecool.snake.entities.powerups.HeartPowerUp;
@@ -9,28 +8,22 @@ import com.codecool.snake.entities.powerups.SimplePowerUp;
 import com.codecool.snake.entities.powerups.SpeedUpPowerUp;
 import com.codecool.snake.entities.snakes.Snake;
 import com.codecool.snake.eventhandler.InputHandler;
-
 import com.sun.javafx.geom.Vec2d;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import sun.java2d.pipe.SpanShapeRenderer;
 
-import javax.swing.text.html.HTMLDocument;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 
 public class Game extends Pane {
 
     public Snake snake = null;
     private GameTimer gameTimer = new GameTimer();
-    public ArrayList<GameEntity> sprites = new ArrayList<>();
+    private ArrayList<GameEntity> sprites = new ArrayList<>();
 
 
-    public Game() {
+    Game() {
         Globals.getInstance().game = this;
         Globals.getInstance().display = new Display(this);
         Globals.getInstance().setupResources();
@@ -38,7 +31,7 @@ public class Game extends Pane {
         init();
     }
 
-    public void init() {
+    private void init() {
         spawnSnake();
         spawnEnemies(4);
         spawnPowerUps(4);
@@ -49,7 +42,7 @@ public class Game extends Pane {
         gameTimer.play();
     }
 
-    public void start() {
+    void start() {
         setupInputHandling();
         Globals.getInstance().startGame();
     }
@@ -58,21 +51,20 @@ public class Game extends Pane {
         snake = new Snake(new Vec2d(500, 500));
     }
 
-    public void spawnEnemies(int numberOfEnemies) {
+    void spawnEnemies(int numberOfEnemies) {
         Vec2d snakeHeadPos = snake.head.getSnakeHeadPosition();
         for (int i = 0; i < numberOfEnemies; ++i) {
             GameEntity temp;
-//            if (i % 2 ==0) {
-//                temp = new SimpleEnemy(snakeHeadPos);
-//            } else {
-//                temp = new HomingEnemy(snakeHeadPos);
-//            }
-            temp = new HomingEnemy(snakeHeadPos);
+            if (i % 2 ==0) {
+                temp = new SimpleEnemy(snakeHeadPos);
+            } else {
+                temp = new HomingEnemy(snakeHeadPos);
+            }
             sprites.add(temp);
         }
     }
 
-    public void spawnPowerUps(int numberOfPowerUps) {
+    void spawnPowerUps(int numberOfPowerUps) {
         GameEntity temp;
         for (int i = 0; i < numberOfPowerUps; ++i) {
             temp = new SimplePowerUp();
@@ -92,7 +84,7 @@ public class Game extends Pane {
         scene.setOnKeyReleased(event -> InputHandler.getInstance().setKeyReleased(event.getCode()));
     }
 
-    public void cleanUp() {
+    void cleanUp() {
         Iterator snakeBody = this.snake.body.getList().iterator();
         Iterator sprite = this.sprites.iterator();
 
@@ -109,7 +101,7 @@ public class Game extends Pane {
         this.snake.life.resetHealth(this.snake.startingHealth);
     }
 
-    public void setSnake() {
+    void setSnake() {
         this.snake.head.setX(500);
         this.snake.head.setY(500);
         snake.addPart(4);

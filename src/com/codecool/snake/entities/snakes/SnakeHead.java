@@ -18,14 +18,14 @@ public class SnakeHead extends GameEntity implements Interactable {
     private Snake snake;
     private double defaultRotation;
 
-    public SnakeHead(Snake snake, Vec2d position) {
+    SnakeHead(Snake snake, Vec2d position) {
         this.snake = snake;
         setImage(Globals.getInstance().getImage("SnakeHead"));
         setPosition(position);
         defaultRotation = getRotate();
     }
 
-    public void updateRotation(SnakeControl turnDirection, float speed) {
+    void updateRotation(SnakeControl turnDirection, float speed) {
         double headRotation = getRotate();
 
 
