@@ -4,6 +4,7 @@ import com.codecool.snake.entities.GameEntity;
 import com.codecool.snake.Globals;
 import com.codecool.snake.Utils;
 import com.codecool.snake.entities.Interactable;
+import com.codecool.snake.entities.ammo.SimpleShot;
 import com.codecool.snake.entities.enemies.Enemy;
 import com.codecool.snake.entities.powerups.SpeedUpPowerUp;
 import com.codecool.snake.entities.powerups.HeartPowerUp;
@@ -28,6 +29,9 @@ public class SnakeHead extends GameEntity implements Interactable {
     void updateRotation(SnakeControl turnDirection, float speed) {
         double headRotation = getRotate();
 
+        if (turnDirection.equals(SnakeControl.SHOOT)) {
+            new SimpleShot();
+        }
 
         if (turnDirection.equals(SnakeControl.TURN_LEFT)) {
             headRotation = headRotation - turnRate;
